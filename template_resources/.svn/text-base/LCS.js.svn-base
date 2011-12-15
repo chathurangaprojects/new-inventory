@@ -1,0 +1,39 @@
+// JavaScript Document
+var base_url ='http://localhost/new_lcs_ims/';
+
+//user login process 
+
+
+$(document).ready(function() {
+    
+    $('#login_button').click(function() {
+
+	var login_username= $('#login_username').val();
+	var login_password= $('#login_password').val();	
+	
+	$('#login_msg').html('<span class="response-msg notice ui-corner-all">validating...</span>');
+	
+	
+
+	$.ajax({
+	   type: "POST",
+	   url: base_url+"index.php/Login/authenticateUser/",   
+	   data: "login_username="+login_username+"&login_password="+login_password,
+	   
+	   
+	   success: function(msg){
+		   
+
+	   if(msg==1){     
+    $('#login_msg').html('<div class="response-msg success ui-corner-all">Login successfull..</div>');   
+      setTimeout("location.href = base_url",100); 
+          } else{			   
+$('#login_msg').html('<div class="response-msg error ui-corner-all">Invalid login details...</div>');   
+    	}	   
+	  
+   }
+   
+ });
+	
+	 });
+});

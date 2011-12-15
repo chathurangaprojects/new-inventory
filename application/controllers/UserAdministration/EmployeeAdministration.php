@@ -1,0 +1,177 @@
+<?php
+	if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+	class EmployeeAdministration extends CI_Controller
+	{
+		function __construct()
+		{
+			parent::__construct();
+			
+			$this->load->model('UserModel');
+			$this->load->model('UserService');
+
+            $this->load->helper(array('form', 'url'));
+            $this->load->library('form_validation');
+			$this->load->model("PurchaseOrder/EmailClass");
+        }
+	
+	
+	
+	  function index(){
+		  
+		  echo "employee administration index";
+	
+	  }//function index
+	  
+	
+	
+	
+	 function employeeRegistrationView(){
+		 
+		   // echo "new employee registration";
+		
+			if($this->session->userdata('logged_in'))
+			{
+		    //the user is logged and priviledges should be checked
+			$userPriviledgeModel=new UserPriviledge();
+			
+		    $userPriviledgeModel->setLevelCode($this->session->userdata('level'));
+			$userPriviledgeModel->setDepartmentCode( $this->session->userdata('department'));
+			$userPriviledgeModel->setPriviledgeCode(1);
+			
+			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
+						
+			if($hasPriviledges){
+				
+				//user has the priviledges
+					$this->template->setTitles('Add New Employee', 'New Employee Registration', 'registration form', 'Registering new employee with LankaCom Inventory Management System');
+			
+			$this->template->load('template', 'PurchaseOrder/registerNewUserView');
+			
+				
+			}
+			else{
+				
+			  // "user doest have the priviledges";
+			  
+			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
+			
+			$this->template->load('template', 'errorPage');
+						
+			}
+			
+			}//if
+			else{
+				
+				
+			redirect(base_url().'index.php');
+	
+			
+			}
+			
+		 
+	 }//function registerNewEmployee
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 function registerNewEmployee(){
+		 
+		 
+		 
+		if($this->session->userdata('logged_in'))
+			{
+		    //the user is logged and priviledges should be checked
+			$userPriviledgeModel=new UserPriviledge();
+			
+		    $userPriviledgeModel->setLevelCode($this->session->userdata('level'));
+			$userPriviledgeModel->setDepartmentCode( $this->session->userdata('department'));
+			$userPriviledgeModel->setPriviledgeCode(1);
+			
+			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
+						
+			if($hasPriviledges){
+				
+				$employeeName=$this->input->post('Employee_Name', TRUE);
+				
+			//	$passwordSentToUser=substr(0,5,$employeeName);
+			///	$passwordStoredInDatabase=md5($passwordSentToUser);
+			
+			$ramdomNum1=rand(500,1000);
+			$randomNum2=rand(100,999);
+			
+			
+			$passwordUser=substr($employeeName,0,4)."".$ramdomNum1."".$randomNum2;
+			$passwordStoredInDatabase=md5($passwordUser);
+				
+				//registering new user
+				$userModel=new UserModel();
+				$userModel->setEmail($this->input->post('Email', TRUE));
+				$userModel->setPassword($passwordStoredInDatabase);
+				$userModel->setEmployeeName($this->input->post('Employee_Name', TRUE));
+				$userModel->setDepartmentCode($this->input->post('Department_Code', TRUE));
+				$userModel->setLevelCode($this->input->post('Level_Code', TRUE));
+				$userModel->setEmployeeCode($this->input->post('Employee_Code', TRUE));
+				$userModel->setDesignation($this->input->post('Designation', TRUE));
+				
+				
+				$userService=new UserService();
+				
+				$insertedStatus=$userService->registerNewEmployee($userModel);
+				
+				 if($insertedStatus){
+					//user registered 
+				  echo '<font color="#009900"> New user created successfully </font>';
+				  
+				           
+              $emailClass=new EmailClass();
+             
+              $emailSentStatus=$emailClass->sendEmail("abanstest@gmail.com","abanstest@gmail.com","new user registration","chathurangat.blogspot.com");
+             
+			 
+				  
+				 }
+				 else{
+				  //email address is already taken
+				  echo '<font color="#CC0000">Email Address is already Taken<font color="#009900">';
+					 
+				 }
+				 
+				 
+		    }
+			else{
+				
+			  // "user doest have the priviledges";
+			  
+			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
+			
+			$this->template->load('template', 'errorPage');
+						
+			}
+			
+			}//if
+			else{
+				
+				
+			redirect(base_url().'index.php');
+	
+			
+			}
+			
+		 
+		 
+		 
+	 }//registerNewEmployee
+	 
+	 
+	 
+	 
+	}//class
+	
+?>
+		
+		

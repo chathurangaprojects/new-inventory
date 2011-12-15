@@ -1,0 +1,36 @@
+<?php
+class UserModel extends CI_Model {
+	
+
+
+var $email;
+var $password;
+var $employeeCode;
+var $employeeName;
+var $departmentCode;
+var $levelCode;
+
+ function __construct()
+    {
+        // Call the Model constructor
+        parent::__construct();
+    }
+	
+function getEmail() { return $this->email; } 
+function getPassword() { return $this->password; } 
+function setEmail($x) { $this->email = $x; } 
+function setPassword($x) { $this->password = $x; } 
+function getEmployeeCode() { return $this->employeeCode; } 
+function getEmployeeName() { return $this->employeeName; } 
+function getDepartmentCode() { return $this->departmentCode; } 
+function getLevelCode() { return $this->levelCode; } 
+function setEmployeeCode($x) { $this->employeeCode = $x; } 
+function setEmployeeName($x) { $this->employeeName = $x; } 
+function setDepartmentCode($x) { $this->departmentCode = $x; } 
+function setLevelCode($x) { $this->levelCode = $x; } 
+	
+}//class
+
+?>
+	
+	

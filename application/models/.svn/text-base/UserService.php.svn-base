@@ -1,0 +1,63 @@
+<?php 
+
+class UserService extends CI_Model {
+	
+	
+	function __construct()
+    {
+        // Call the Model constructor
+        parent::__construct();
+		$this->load->database();
+        $this->load->model('UserModel');
+    }
+	
+	
+	
+	
+	function checkUserLoginAuthentication($userModel){
+		
+		$password=md5($userModel->getPassword());
+		
+		$parameters=array('Email' =>$userModel->getEmail(),'Password'=>$password);
+		
+		$query = $this->db->get_where('ta_ims_employee',$parameters);
+		
+		$loggedUserModel=NULL;
+		
+		foreach ($query->result() as $row)
+        {
+			//create the model upon succesful login
+		   	$loggedUserModel=new UserModel();
+			
+		   $loggedUserModel->setEmployeeCode($row->Employee_Code);
+		   $loggedUserModel->setEmployeeName($row->Employee_Name);
+		   $loggedUserModel->setLevelCode($row->Level_Code);
+		   $loggedUserModel->setDepartmentCode($row->Department_Code);
+		   $loggedUserModel->setEmail($row->Email);
+
+         }	
+			
+			
+			return $loggedUserModel;
+		
+	}//checkUserLoginAuthentication
+	
+	
+	
+	
+	
+	 function registerNewEmployee($usermodel){
+		 
+		 //implement here
+		 
+		 
+		 
+	
+	
+	 }//registerNewEmployee
+	 
+	 
+}
+?>
+
+	
