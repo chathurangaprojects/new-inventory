@@ -22,8 +22,8 @@ function sendEmail($emailFrom,$emailTo,$subject,$message){
   'protocol' => $this->emailProtocol,
   'smtp_host' => $this->emailHost,
   'smtp_port' => $this->emailPort,
-  'smtp_user' => $this->emailUsername, // change it to yours
-  'smtp_pass' => $this->emailPassword, // change it to yours
+  'smtp_user' => $this->emailUsername, 
+  'smtp_pass' => $this->emailPassword, 
   'mailtype' => $this->emaiType,
   'charset' => 'iso-8859-1',
   'wordwrap' => TRUE
@@ -54,6 +54,8 @@ function sendEmail($emailFrom,$emailTo,$subject,$message){
    
      
 }
+
+
      
          
 }//class

@@ -75,8 +75,8 @@ function addNewEmployee(){
 	  }
 	  
 	  else{
-		  		  
-	  $('#addnewempmsg').html(''); 
+	  
+	  $('#addnewempmsg').html('<font color="#CC0000"> Please wait............ </font>'); 
 	  
    $.ajax({
    type: "POST",   

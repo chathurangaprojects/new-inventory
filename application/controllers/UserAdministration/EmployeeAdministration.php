@@ -95,7 +95,7 @@
 			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
 						
 			if($hasPriviledges){
-				
+			
 				$employeeName=$this->input->post('Employee_Name', TRUE);
 				
 			//	$passwordSentToUser=substr(0,5,$employeeName);
@@ -125,14 +125,14 @@
 				
 				 if($insertedStatus){
 					//user registered 
-				  echo '<font color="#009900"> New user created successfully </font>';
+				 
 				  
 				           
               $emailClass=new EmailClass();
              
               $emailSentStatus=$emailClass->sendEmail("abanstest@gmail.com","abanstest@gmail.com","new user registration","chathurangat.blogspot.com");
              
-			 
+			  echo '<font color="#009900"> New user created successfully and confirmation email was sent </font>';
 				  
 				 }
 				 else{
