@@ -88,7 +88,7 @@
                         <tr id="employees<?php echo $userModelObjectArray[$index]->getEmployeeCode(); ?>">
                       
                             <td class="center"><input type="checkbox" value="1" name="list" class="checkbox"/></td> 
-                            <td><?php  echo $userModelObjectArray[$index]->getEmployeeCode(); ?></td> 
+                            <td><?php  echo $userModelObjectArray[$index]->getEmployeeName(); ?></td> 
                             <td><?php  echo $userModelObjectArray[$index]->getDesignation(); ?></td>
                                                         <?php
 							//finding the department name
