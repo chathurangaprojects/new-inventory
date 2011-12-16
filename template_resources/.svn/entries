@@ -1,15 +1,15 @@
 10
 
 dir
-9
-svn+ssh://web@192.168.0.44/LCS_IMS/template_resources
-svn+ssh://web@192.168.0.44/LCS_IMS
+14
+svn+ssh://web@192.168.0.11/LCS_IMS/template_resources
+svn+ssh://web@192.168.0.11/LCS_IMS
 
 
 
-2011-12-15T04:59:49.435872Z
-1
-chathuranga
+2011-12-16T03:12:20.977105Z
+14
+roomi
 
 
 
@@ -44,10 +44,10 @@ file
 
 
 
-2011-12-15T04:38:31.125000Z
-37d99ebed89cdc25ee50ae1595308e86
-2011-12-15T04:59:49.435872Z
-1
+2011-12-16T03:08:37.937500Z
+054bbcb7526f5037dd4668db629ca17c
+2011-12-16T03:11:43.995895Z
+13
 chathuranga
 
 
@@ -70,5 +70,39 @@ chathuranga
 
 
 
-969
+2558
+
+LCS2.js
+file
+
+
+
+
+2011-12-16T03:12:52.875000Z
+ba9774c6407cd291ef1dcdffeaa82f3c
+2011-12-16T03:12:20.977105Z
+14
+roomi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+313
 

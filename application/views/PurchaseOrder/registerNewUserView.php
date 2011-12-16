@@ -1,24 +1,27 @@
 
+
 <div class="content-box">
-  <form action="#" method="post" enctype="multipart/form-data" class="forms" name="form" >
+  <form method="post" enctype="multipart/form-data" class="forms" name="form"  id="user_registration_form" name="user_registration_form">
     <ul>
       <li>
         <label  class="desc"> Employee Name </label>
         <div>
-          <input type="text" tabindex="1" maxlength="255" value="" class="field text small" id="Employee_Name" />
+          <input type="text" tabindex="1" maxlength="255" value="" class="field text small" id="Employee_Name" name="Employee_Name" />
         </div>
+
       </li>
+
       <li>
       
         <label  class="desc"> Designation </label>
         <div>
-          <input type="text" tabindex="1" maxlength="255" value="" class="field text small" id="Designation" />
+          <input type="text" tabindex="1" maxlength="255" value="" class="field text small" id="Designation" name="Designation" />
         </div>
       </li>
       <li>
         <label  class="desc"> Department </label>
         <div>
-          <select tabindex="3" class="field select small" id="Department_Code" >
+          <select tabindex="3" class="field select small" id="Department_Code" name="Department_Code" >
             <option value="">Please select</option>
             <?php
 								 
@@ -39,13 +42,13 @@
       <li>
         <label  class="desc"> Email </label>
         <div>
-          <input type="text" tabindex="1" maxlength="255" value="" class="field text small" id="Email" />
+          <input type="text" tabindex="1" maxlength="255" value="" class="field text small" id="Email" name="Email"/>
         </div>
       </li>
       <li>
         <label  class="desc"> Secutiry Level </label>
         <div>
-          <select tabindex="3" class="field select small" id="Level_Code" >
+          <select tabindex="3" class="field select small" id="Level_Code" name="Level_Code">
             <option value="">Please select</option>
             <?php
 								 
@@ -70,7 +73,8 @@
         <div id="addnewempmsg"> </div>
       </li>
       <li class="buttons">
-        <button class="ui-state-default ui-corner-all ui-button" type="button" onclick="addNewEmployee()">Add</button>
+        <!--<button class="ui-state-default ui-corner-all ui-button" type="submit" onclick="addNewEmployee()">Add</button>-->
+        <input type="submit" class="ui-state-default ui-corner-all ui-button" value="Add" id="submit" name="submit"  />
       </li>
     </ul>
   </form>

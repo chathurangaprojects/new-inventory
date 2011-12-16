@@ -9,9 +9,6 @@
 			
 			$this->load->model('UserModel');
 			$this->load->model('UserService');
-
-            $this->load->helper(array('form', 'url'));
-            $this->load->library('form_validation');
 		}
 
 		

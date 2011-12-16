@@ -1,4 +1,5 @@
-<?php 
+<?php
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class UserService extends CI_Model {
 	
@@ -74,6 +75,44 @@ class UserService extends CI_Model {
 	
 	
   }//registerNewEmployee
+  
+  
+  
+  
+  
+  
+  
+  function retrieveAllEmployeeDetails(){
+	  	  
+	  	$query = $this->db->get('ta_ims_employee');
+		
+		$employeeDataArray=array();
+		$index=0;
+		
+		foreach ($query->result() as $row)
+		{
+			$employeeModel=new UserModel();
+			
+			/*
+			$employeeModel->setDepartmentCode($row->Department_Code);
+			$employeeModel->setDepartmentName($row->Department_Name);
+			$employeeModel->setDepartmentID($row->Department_ID);
+			*/
+		   $employeeModel->setEmployeeCode($row->Employee_Code);
+		   $employeeModel->setEmployeeName($row->Employee_Name);
+		   $employeeModel->setLevelCode($row->Level_Code);
+		   $employeeModel->setDepartmentCode($row->Department_Code);
+		   $employeeModel->setEmail($row->Email);
+		   
+    		$employeeDataArray[$index]=$employeeModel;
+			$index++;
+		}
+		
+		
+		return $employeeDataArray;  
+	  
+  }//retrieveAllEmployeeDetails
+  
 	 
 	 
 

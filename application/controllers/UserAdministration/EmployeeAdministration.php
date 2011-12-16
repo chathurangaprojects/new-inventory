@@ -52,7 +52,7 @@
 			}
 			else{
 				
-			  // "user doest have the priviledges";
+			  // "user doesnt have the priviledges";
 			  
 			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
 			
@@ -126,6 +126,7 @@
 				$insertedStatus=$userService->registerNewEmployee($userModel);
 				
 				 if($insertedStatus){
+					 	 
 					//user registered 
 				 				           
               $emailClass=new EmailClass();
@@ -165,6 +166,18 @@
 		 
 	 }//registerNewEmployee
 	 
+	 
+	 
+	 
+	 
+	 
+	 function test(){
+		 
+	 //echo '<font color="#CC0000">test form submit<font color="#009900">';
+   echo $this->input->post('Email',TRUE);
+		 
+	
+	 }//function
 	 
 	 
 	 

@@ -1,5 +1,5 @@
 // JavaScript Document
-var base_url ='http://localhost/new_lcs_ims/';
+var base_url ='http://localhost/LCS_IMS/';
 
 //user login process 
 
@@ -36,4 +36,75 @@ $('#login_msg').html('<div class="response-msg error ui-corner-all">Invalid logi
  });
 	
 	 });
+		
 });
+
+
+
+
+//adding new employee
+
+function addNewEmployee(){
+    
+       
+    var Employee_Name = $('#Employee_Name').val();
+    var Designation = $('#Designation').val();
+    var Department_Code = $('#Department_Code').val();
+    var Email = $('#Email').val();
+    var Level_Code = $('#Level_Code').val();
+    
+	  if(Employee_Name==""){
+		  
+		 $('#addnewempmsg').html('<font color="#CC0000">Employee Name is required </font>'); 
+	  }
+	  else if(Designation==""){
+		  
+		 $('#addnewempmsg').html('<font color="#CC0000">Designation field is required </font>'); 
+	  }
+      else if(Department_Code==""){
+		  
+		 $('#addnewempmsg').html('<font color="#CC0000">Department is Required </font>');
+		 
+	  }
+	  else if(Email=="" && validateEmail()){
+		 $('#addnewempmsg').html('<font color="#CC0000">Email is required </font>'); 
+	  }
+	  else if(Level_Code==""){
+		  
+		 $('#addnewempmsg').html('<font color="#CC0000">Security Level is required </font>'); 
+	  }
+	  
+	  else{
+	  
+	  $('#addnewempmsg').html('<font color="#CC0000"> Please wait............ </font>'); 
+	  
+   $.ajax({
+   type: "POST",   
+   url: base_url+"index.php/UserAdministration/EmployeeAdministration/registerNewEmployee", 
+   data: "Employee_Name="+Employee_Name+"&Designation="+Designation+"&Department_Code="+Department_Code+"&Email="+Email+"&Level_Code="+Level_Code,
+   
+   success: function(msg){
+     
+   $('#addnewempmsg').html(msg); 
+     
+   }
+   
+  
+ });   
+   
+ 
+ }//else
+	  
+     
+}//addEmployee
+
+
+
+function validateEmail(){
+	
+	return false;
+
+}
+
+
+

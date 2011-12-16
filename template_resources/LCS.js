@@ -43,7 +43,7 @@ $('#login_msg').html('<div class="response-msg error ui-corner-all">Invalid logi
 
 
 //adding new employee
-
+/*
 function addNewEmployee(){
     
        
@@ -66,7 +66,7 @@ function addNewEmployee(){
 		 $('#addnewempmsg').html('<font color="#CC0000">Department is Required </font>');
 		 
 	  }
-	  else if(Email==""){
+	  else if(Email=="" && validateEmail()){
 		 $('#addnewempmsg').html('<font color="#CC0000">Email is required </font>'); 
 	  }
 	  else if(Level_Code==""){
@@ -97,4 +97,129 @@ function addNewEmployee(){
 	  
      
 }//addEmployee
+*/
+
+
+function addNewEmployee(){
+    
+     
+    var Employee_Name = $('#Employee_Name').val();
+    var Designation = $('#Designation').val();
+    var Department_Code = $('#Department_Code').val();
+    var Email = $('#Email').val();
+    var Level_Code = $('#Level_Code').val();
+
+    
+	  
+	  
+ $('#addnewempmsg').html('<font color="#CC0000"> Please wait............ </font>'); 
+	  
+   $.ajax({
+   type: "POST",   
+   url: base_url+"index.php/UserAdministration/EmployeeAdministration/registerNewEmployee", 
+   data: "Employee_Name="+Employee_Name+"&Designation="+Designation+"&Department_Code="+Department_Code+"&Email="+Email+"&Level_Code="+Level_Code,
+   
+   success: function(msg){
+     
+   $('#addnewempmsg').html(msg); 
+     
+   
+   }
+  
+ });   
+   
+
+  
+}//addEmployee
+
+
+/*
+// validate signup form on keyup and submit
+$("#user_registration_form").validate({
+rules: {
+Employee_Name: "required",
+Designation: "required",
+email: {
+required: true,
+email: true
+},
+messages: {
+Employee_Name: "Please enter your firstname",
+Designation: "Please enter your lastname",
+email: "Please enter a valid email address",
+}
+}
+});*/
+
+
+/*
+$().ready(function() {
+	$("#user_registration_form").validate
+	({
+		rules:
+		{
+			Employee_Name: "required", messages:
+			{
+				Employee_Name: "Please enter your firstname"
+			}
+		}
+	});
+});
+
+*/
+
+function adduser(){
+	
+	
+	alert('ddddd');
+	
+	
+	
+	
+}
+
+
+
+
+$().ready(function() {
+    //form name and id
+	$("#user_registration_form").validate
+	({
+	 
+	 
+	 
+		rules:
+		{
+			Employee_Name: "required",
+			Designation: "required",
+			Department_Code: "required",
+			Level_Code: "required",
+			Email: {
+				required: true,
+				email: true
+			}
+		},
+			messages:
+			{
+				Employee_Name: "Employee Name is required",
+				Designation: "Designation is required",
+				Department_Code: "Departmen code is required",
+				Email: "Please enter valid email address",
+				Level_Code: "Security Level is required"
+				
+			},
+			
+			submitHandler: function(form) {
+				 $('#addnewempmsg').html('<font color="#CC0000"> Please wait............ </font>'); 
+				$.post(base_url+'index.php/UserAdministration/EmployeeAdministration/registerNewEmployee', $("#user_registration_form").serialize(), function(msg) {
+					$('#addnewempmsg').html(msg);
+				});
+			}
+
+	});
+});
+
+
+
+
 

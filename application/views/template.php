@@ -31,11 +31,13 @@ echo $this->template->getPage_title();
 
 <link href="<?php echo base_url(); ?>template_resources/css/livevalidation_standalone.css" rel="stylesheet" />
 
-<script type="text/javascript" src="<?php echo base_url(); ?>template_resources/js/autocomplete/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>template_resources/js/autocomplete/jquery.autocomplete.js"></script><hr />
+
 
 <link href="<?php echo base_url(); ?>template_resources/js/autocomplete/jquery.autocomplete.css" rel="stylesheet" />
 
 <script type="text/javascript" src="<?php echo base_url(); ?>template_resources/LCS.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>template_resources/LCS2.js"></script>
 
 
 <!--[if IE 6]>
@@ -47,6 +49,10 @@ echo $this->template->getPage_title();
 DD_belatedPNG.fix('.logo, ul#dashboard-buttons li a, .response-msg, #search-bar input');
 </script>
 <![endif]-->
+
+<script type="text/javascript" src="<?php echo base_url(); ?>template_resources/jquery.validate.js"></script>
+
+
 </head>
 
 <body>
