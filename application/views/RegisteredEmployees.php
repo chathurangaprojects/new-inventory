@@ -2,7 +2,7 @@
 
 <label  class="desc"> List All Employees in Department </label>
         <div>
-          <select tabindex="3" class="field select small" id="Department_Code" name="Department_Code" >
+          <select tabindex="3" class="field select small" id="Department_Code" name="Department_Code" onchange="retriveDepartment()" >
             <option value="">Please select</option>
             <?php
 								 

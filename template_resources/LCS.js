@@ -223,3 +223,18 @@ $().ready(function() {
 
 
 
+
+
+function retriveDepartment(){
+	
+	
+    var departmentCode = $('#Department_Code').val();
+
+    alert(departmentCode);
+	
+}
+
+
+
+
+
