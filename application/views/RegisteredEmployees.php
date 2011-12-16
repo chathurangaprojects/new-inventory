@@ -1,5 +1,28 @@
 <div class="hastable">   
 
+<label  class="desc"> List All Employees in Department </label>
+        <div>
+          <select tabindex="3" class="field select small" id="Department_Code" name="Department_Code" >
+            <option value="">Please select</option>
+            <?php
+								 
+				$this->load->model(array('PurchaseOrder/DepartmentModel','PurchaseOrder/DepartmentService'));
+			  
+			    $departmentService=new DepartmentService();
+				
+				$departmentData=$departmentService->retriveAllDepartmentDetails();
+					for($index=0;$index<sizeof($departmentData);$index++){
+					?>
+            <option value="<?php echo $departmentData[$index]->getDepartmentCode(); ?>"><?php echo $departmentData[$index]->getDepartmentName(); ?></option>
+            <?php
+					}
+				?>
+          </select>
+        </div>
+  <br/>
+  <br/>
+  <br/>
+        
 <table id="sort-table"> 
                         <thead> 
                         <tr>

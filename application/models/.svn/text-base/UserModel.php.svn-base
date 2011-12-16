@@ -78,6 +78,10 @@ function setStatus($x) { $this->Status = $x; }
 */
 		
 
+
+
+
+
 }//class
 
 ?>
