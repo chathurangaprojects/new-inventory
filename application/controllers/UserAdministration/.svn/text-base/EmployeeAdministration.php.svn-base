@@ -52,7 +52,7 @@
 			}
 			else{
 				
-			  // "user doesnt have the priviledges";
+			  // "user doest have the priviledges";
 			  
 			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
 			
@@ -126,7 +126,6 @@
 				$insertedStatus=$userService->registerNewEmployee($userModel);
 				
 				 if($insertedStatus){
-					 	 
 					//user registered 
 				 				           
               $emailClass=new EmailClass();
@@ -167,85 +166,6 @@
 	 }//registerNewEmployee
 	 
 	 
-	 
-	 
-	 
-	 
-     function displayRegisteredEmployees(){
-		 
-	 
-	 
-	// echo "display registered emaployees";
-	
-	   // echo "new employee registration";
-		
-			if($this->session->userdata('logged_in'))
-			{
-		    //the user is logged and priviledges should be checked
-			$userPriviledgeModel=new UserPriviledge();
-			
-		    $userPriviledgeModel->setLevelCode($this->session->userdata('level'));
-			$userPriviledgeModel->setDepartmentCode( $this->session->userdata('department'));
-			$userPriviledgeModel->setPriviledgeCode(2);//priviledge 2 is for edit employees
-			
-			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
-						
-			if($hasPriviledges){
-				
-				//user has the priviledges
-					$this->template->setTitles('Manage Employees', 'Employee Management', 'Registerd Employees', 'Manage Registered Employees');
-			
-			$this->template->load('template', 'RegisteredEmployees');
-			
-				
-			}
-			else{
-				
-			  // "user doesnt have the priviledges";
-			  
-			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
-			
-			$this->template->load('template', 'errorPage');
-						
-			}
-			
-			}//if
-			else{
-				
-				
-			redirect(base_url().'index.php');
-	
-			
-			}
-			 
-	 
-	 }//displayRegisteredEmployees
-	 
-	 
-	 
-	 
-	 
-	 
-	 function activateEmployee(){
-		 
-		 	 
-		 echo "Activate Employee";
-		 
-		 
-	 }//activateEmployee
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 function inactivateEmployee(){
-		 
-		 
-		 echo "inactivateEmployee";
-		 
-	 }//inactivateEmployee
 	 
 	 
 	 

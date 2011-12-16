@@ -10,6 +10,7 @@ class UserService extends CI_Model {
         parent::__construct();
 		$this->load->database();
         $this->load->model('UserModel');
+		$this->load->model('UserLevelModel');
     }
 	
 	
@@ -93,16 +94,14 @@ class UserService extends CI_Model {
 		{
 			$employeeModel=new UserModel();
 			
-			/*
-			$employeeModel->setDepartmentCode($row->Department_Code);
-			$employeeModel->setDepartmentName($row->Department_Name);
-			$employeeModel->setDepartmentID($row->Department_ID);
-			*/
 		   $employeeModel->setEmployeeCode($row->Employee_Code);
 		   $employeeModel->setEmployeeName($row->Employee_Name);
 		   $employeeModel->setLevelCode($row->Level_Code);
 		   $employeeModel->setDepartmentCode($row->Department_Code);
+		   $employeeModel->setDesignation($row->Designation);
 		   $employeeModel->setEmail($row->Email);
+		   $employeeModel->setStatus($row->Status);
+		   
 		   
     		$employeeDataArray[$index]=$employeeModel;
 			$index++;
@@ -115,8 +114,30 @@ class UserService extends CI_Model {
   
 	 
 	 
-
-}
+	 
+   function retriveUserLevel($userModel){
+	  
+	   	   
+	 $levelCode=$userModel->getLevelCode();
+	 
+	 $query = $this->db->get_where('ta_ims_level', array('Level_Code' =>$levelCode));
+	 
+	 	foreach ($query->result() as $row)
+		{
+		$userLevelModel = new UserLevelModel();
+		
+		$userLevelModel->setLevel_Code($row->Level_Code);
+		$userLevelModel->setLevel($row->Level);
+		$userLevelModel->setDescription($row->Description);
+		
+		return $userLevelModel;
+		
+		}
+	   
+   }//function
+   
+   
+} 
 ?>
 
 	
