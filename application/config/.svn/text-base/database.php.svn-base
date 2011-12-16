@@ -41,7 +41,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '192.168.0.44';
+$db['default']['hostname'] = '192.168.0.11';
 $db['default']['username'] = 'web';
 $db['default']['password'] = 'abc123@#';
 $db['default']['database'] = 'lcs_ims';

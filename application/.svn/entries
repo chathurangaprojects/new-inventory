@@ -2,8 +2,8 @@
 
 dir
 9
-svn+ssh://web@192.168.0.44/LCS_IMS/application
-svn+ssh://web@192.168.0.44/LCS_IMS
+svn+ssh://web@192.168.0.11/LCS_IMS/application
+svn+ssh://web@192.168.0.11/LCS_IMS
 
 
 
@@ -26,13 +26,13 @@ chathuranga
 
 aad1d6d2-6b87-47d0-b190-0244a060989b
 
-models
+hooks
 dir
 
 language
 dir
 
-hooks
+models
 dir
 
 core
@@ -127,9 +127,9 @@ chathuranga
 
 13
 
-libraries
+errors
 dir
 
-errors
+libraries
 dir
 

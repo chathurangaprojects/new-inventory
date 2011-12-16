@@ -79,6 +79,7 @@
 	 
 	 
 	 
+	 
 	 function registerNewEmployee(){
 		 
 		 
@@ -107,7 +108,8 @@
 			
 			$passwordUser=substr($employeeName,0,4)."".$ramdomNum1."".$randomNum2;
 			$passwordStoredInDatabase=md5($passwordUser);
-				
+			
+			$userEmail=$this->input->post('Email', TRUE);
 				//registering new user
 				$userModel=new UserModel();
 				$userModel->setEmail($this->input->post('Email', TRUE));
@@ -125,12 +127,10 @@
 				
 				 if($insertedStatus){
 					//user registered 
-				 
-				  
-				           
+				 				           
               $emailClass=new EmailClass();
              
-              $emailSentStatus=$emailClass->sendEmail("abanstest@gmail.com","abanstest@gmail.com","new user registration","chathurangat.blogspot.com");
+              $emailSentStatus=$emailClass->sendEmail("abanstest@gmail.com",$userEmail,"new user registration","new user registration details <br/><br/><br/><b>username </b> ".$userEmail." <br/><b/>password </b>".$passwordUser);
              
 			  echo '<font color="#009900"> New user created successfully and confirmation email was sent </font>';
 				  
@@ -161,9 +161,7 @@
 	
 			
 			}
-			
-		 
-		 
+			 
 		 
 	 }//registerNewEmployee
 	 

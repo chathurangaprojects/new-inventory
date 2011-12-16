@@ -46,17 +46,37 @@ class UserService extends CI_Model {
 	
 	
 	
-	 function registerNewEmployee($usermodel){
-		 
-		 //implement here
+	 function registerNewEmployee($userModel){
 		 
 		 
+		 $employeeData=array(
+		 'Email'=>$userModel->getEmail(),
+		 'Password'=>$userModel->getPassword(),
+		 'Employee_Name'=>$userModel->getEmployeeName(),
+		 'Designation'=>$userModel->getDesignation(),
+		 'Level_Code'=>$userModel->getLevelCode(),
+         'Department_Code'=>$userModel->getDepartmentCode(),
+         'Confirmation_Code'=>'123',
+		 'Status'=>'1');
 		 
+		 	$query = $this->db->get_where('ta_ims_employee', array('Email' => $userModel->getEmail()));
+	
+	if ($query->num_rows() > 0){
+		//email address is already registered
+		return FALSE;
+	}
+	else{
+	   //email address is not registered	
+	      $this->db->insert('ta_ims_employee', $employeeData); 
+		  
+		  return TRUE;
+	}
 	
 	
-	 }//registerNewEmployee
+  }//registerNewEmployee
 	 
 	 
+
 }
 ?>
 
