@@ -110,7 +110,7 @@ Logout
 </li>
 
 <li>
-<a href="<?php echo base_url(); ?>index.php/PurchaseOrder/PurchaseOrderManagement/createNewPurchaseOrder" class="sf-with-ul">Manage Employees</a>
+<a href="<?php echo base_url(); ?>index.php/UserAdministration/EmployeeAdministration/displayRegisteredEmployees" class="sf-with-ul">Manage Employees</a>
 </li>
 
 </ul>
