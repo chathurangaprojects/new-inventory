@@ -178,6 +178,9 @@ class UserService extends CI_Model {
    }//function
    
    
+   
+   
+   
 } 
 ?>
 
