@@ -86,7 +86,7 @@
                             <td><?php  echo $userModelObjectArray[$index]->getEmail();?></td>   
                             <td><?php  echo $userModelRetrieved->getLevel()."-".$userModelRetrieved->getDescription();  ?></td>   
                             <td>
-                                <a class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Edit this example" href="#">
+                                <a class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Edit this example" href="<?php  echo base_url(); ?>index.php/UserAdministration/EmployeeAdministration/editEmployeeProfile/<?php echo $userModelObjectArray[$index]->getEmployeeCode(); ?>">
                                     <span class="ui-icon ui-icon-wrench"></span>
                                 </a>
                               
@@ -99,7 +99,7 @@
 										 //activate employee
                                  ?>
 
-                                <a href="<?php  echo base_url(); ?>index.php/UserAdministration/EmployeeAdministration/activateEmployee" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Enabled."  style="cursor:pointer;">
+                                <a href="<?php  echo base_url(); ?>index.php/UserAdministration/EmployeeAdministration/activateEmployee/<?php echo $userModelObjectArray[$index]->getEmployeeCode(); ?>" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Enabled."  style="cursor:pointer;">
                                 
                                     <span class="ui-icon ui-icon-arrowreturnthick-1-n"></span>
                                 </a>                                  
@@ -109,7 +109,7 @@
 									 if($userModelObjectArray[$index]->getStatus()=='1'){
 										 //disable employees
                                  ?>
-                                <a href="<?php  echo base_url(); ?>index.php/UserAdministration/EmployeeAdministration/inactivateEmployee" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Disabled."  style="cursor:pointer;">
+                                <a href="<?php  echo base_url(); ?>index.php/UserAdministration/EmployeeAdministration/inactivateEmployee/<?php echo $userModelObjectArray[$index]->getEmployeeCode(); ?>" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Disabled."  style="cursor:pointer;">
                                     <span class="ui-icon ui-icon-arrowreturnthick-1-s"></span>
                                 </a>                                  
                                  <?php } ?>

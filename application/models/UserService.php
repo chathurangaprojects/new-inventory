@@ -85,7 +85,7 @@ class UserService extends CI_Model {
   
   function retrieveAllEmployeeDetails(){
 	  	  
-	  	$query = $this->db->get('ta_ims_employee');
+	  	$query = $this->db->get_where('ta_ims_employee',array('status'=>'1'));
 		
 		$employeeDataArray=array();
 		$index=0;

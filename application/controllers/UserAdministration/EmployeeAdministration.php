@@ -174,11 +174,6 @@
 	 
      function displayRegisteredEmployees(){
 		 
-	 
-	 
-	// echo "display registered emaployees";
-	
-	   // echo "new employee registration";
 		
 			if($this->session->userdata('logged_in'))
 			{
@@ -194,7 +189,7 @@
 			if($hasPriviledges){
 				
 				//user has the priviledges
-					$this->template->setTitles('Manage Employees', 'Employee Management', 'Registerd Employees', 'Manage Registered Employees');
+					$this->template->setTitles('Manage Employees', 'Employee Management', 'Registerd Employees', 'Registered Active Employees');
 			
 			$this->template->load('template', 'RegisteredEmployees');
 			
@@ -227,11 +222,44 @@
 	 
 	 
 	 
-	 function activateEmployee(){
+	 function activateEmployee($employeeID){
 		 
 		 	 
-		 echo "Activate Employee";
-		 
+			if($this->session->userdata('logged_in'))
+			{
+		    //the user is logged and priviledges should be checked
+			$userPriviledgeModel=new UserPriviledge();
+			
+		    $userPriviledgeModel->setLevelCode($this->session->userdata('level'));
+			$userPriviledgeModel->setDepartmentCode( $this->session->userdata('department'));
+			$userPriviledgeModel->setPriviledgeCode(3);//priviledge 3 is for delete employees
+			
+			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
+						
+			if($hasPriviledges){
+			
+        		 echo "Activate Employee".$employeeID;
+		   
+		     }
+			else{
+				
+			  // "user doesnt have the priviledges";
+			  
+			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
+			
+			$this->template->load('template', 'errorPage');
+						
+			}
+			
+			}//if
+			else{
+				
+				
+			redirect(base_url().'index.php');
+	
+			
+			}
+			
 		 
 	 }//activateEmployee
 	 
@@ -241,12 +269,47 @@
 	 
 	 
 	 
-	 function inactivateEmployee(){
+	 function inactivateEmployee($employeeID){
 		 
-		 
-		 echo "inactivateEmployee";
+		  	if($this->session->userdata('logged_in'))
+			{
+		     //the user is logged and priviledges should be checked
+			$userPriviledgeModel=new UserPriviledge();
+			
+		    $userPriviledgeModel->setLevelCode($this->session->userdata('level'));
+			$userPriviledgeModel->setDepartmentCode( $this->session->userdata('department'));
+			$userPriviledgeModel->setPriviledgeCode(3);//priviledge 3 is for delete employees
+			
+			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
+						
+			if($hasPriviledges){
+			
+        		echo "inactivateEmployee".$employeeID;
+		   
+		     }
+			else{
+				
+			  // "user doesnt have the priviledges";
+			  
+			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
+			
+			$this->template->load('template', 'errorPage');
+						
+			}
+			
+			}//if
+			else{
+				
+				
+			redirect(base_url().'index.php');
+	
+			
+			}
+			
+		
 		 
 	 }//inactivateEmployee
+	 
 	 
 	 
 	 
@@ -314,17 +377,17 @@
 	  <td>'.$userModelObjectArray[$index]->getEmail().'</td>
 	  <td>'.$userModelRetrieved->getLevel()."-".$userModelRetrieved->getDescription().'</td> 
 	  <td>
-       <a class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Edit this example" href="#">
+       <a class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Edit this example" href="'.base_url().'index.php/UserAdministration/EmployeeAdministration/editEmployeeProfile/'.$userModelObjectArray[$index]->getEmployeeCode().'">
         <span class="ui-icon ui-icon-wrench"></span>
        </a>';
 	    if($userModelObjectArray[$index]->getStatus()=='0'){
-	   $userData=$userData.'<a href="'.base_url().'index.php/UserAdministration/EmployeeAdministration/activateEmployee" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Enabled."  style="cursor:pointer;">
+	   $userData=$userData.'<a href="'.base_url().'index.php/UserAdministration/EmployeeAdministration/activateEmployee/'.$userModelObjectArray[$index]->getEmployeeCode().'" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Enabled."  style="cursor:pointer;">
 	   <span class="ui-icon ui-icon-arrowreturnthick-1-n"></span>
 	   </a>';
 	   }
 	   
 	    if($userModelObjectArray[$index]->getStatus()=='1'){
-	   $userData=$userData.'<a href="'.base_url().'index.php/UserAdministration/EmployeeAdministration/inactivateEmployee" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Disabled."  style="cursor:pointer;">
+	   $userData=$userData.'<a href="'.base_url().'index.php/UserAdministration/EmployeeAdministration/inactivateEmployee/'.$userModelObjectArray[$index]->getEmployeeCode().'" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Disabled."  style="cursor:pointer;">
        <span class="ui-icon ui-icon-arrowreturnthick-1-s"></span>
 	   </a>
        </td></tr>'; 
@@ -339,6 +402,55 @@
        echo $tableHeader.''.$userData.''.$tableFooter;
 
 	 }//retriveRegisteredEmployeesInDepartment
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 function editEmployeeProfile($employeeID){
+	 
+	 
+	    if($this->session->userdata('logged_in'))
+			{
+		     //the user is logged and priviledges should be checked
+			$userPriviledgeModel=new UserPriviledge();
+			
+		    $userPriviledgeModel->setLevelCode($this->session->userdata('level'));
+			$userPriviledgeModel->setDepartmentCode( $this->session->userdata('department'));
+			$userPriviledgeModel->setPriviledgeCode(2);//priviledge 2 is for edit employees
+			
+			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
+						
+			if($hasPriviledges){
+			
+        		echo "edit employee ".$employeeID;
+		   
+		     }
+			else{
+				
+			  // "user doesnt have the priviledges";
+			  
+			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
+			
+			$this->template->load('template', 'errorPage');
+						
+			}
+			
+			}//if
+			else{
+				
+				
+			redirect(base_url().'index.php');
+	
+			
+			}
+			
+		
+	 
+	 }//editEmployeeProfile
 	 
 	 
 	 
