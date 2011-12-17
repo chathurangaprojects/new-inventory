@@ -137,6 +137,47 @@ class UserService extends CI_Model {
    }//function
    
    
+   
+   
+   
+   
+   function retriveAllUsersMatchesProvidedCrieteria($userModel){
+   
+    $departmentCode=$userModel->getDepartmentCode();
+    $userStatus=$userModel->getStatus();
+   if($userStatus!=3){
+     $query = $this->db->get_where('ta_ims_employee', array('Department_Code'=>$departmentCode,'Status' => $userStatus));
+   }
+   else{
+     //user status 3 means to retrieve both active and inactive users
+     $query = $this->db->get_where('ta_ims_employee', array('Department_Code'=>$departmentCode));
+   }
+        $employeeDataArray=array();
+		$index=0;
+		
+		foreach ($query->result() as $row)
+		{
+			$employeeModel=new UserModel();
+			
+		   $employeeModel->setEmployeeCode($row->Employee_Code);
+		   $employeeModel->setEmployeeName($row->Employee_Name);
+		   $employeeModel->setLevelCode($row->Level_Code);
+		   $employeeModel->setDepartmentCode($row->Department_Code);
+		   $employeeModel->setDesignation($row->Designation);
+		   $employeeModel->setEmail($row->Email);
+		   $employeeModel->setStatus($row->Status);
+		   
+		   
+    		$employeeDataArray[$index]=$employeeModel;
+			$index++;
+		}
+		
+		
+		return $employeeDataArray;  
+   
+   }//function
+   
+   
 } 
 ?>
 

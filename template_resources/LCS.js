@@ -229,12 +229,44 @@ function retriveDepartment(){
 	
 	
     var departmentCode = $('#Department_Code').val();
-
-    alert(departmentCode);
+	
+  $('#user_status').html("<label>Display all </label><br/> <input type='radio' id='employee_status' name='employee_status' value='1' onchange='retrieveAllRegisteredEmployees()' checked/> Active Employees </input> <br/> <br/><input type='radio' id='employee_status' name='employee_status' value='0' onchange='retrieveAllRegisteredEmployees()'/> Inactive Employees </input> <br/><br/><input type='radio' id='employee_status' name='employee_status' value='3' onchange='retrieveAllRegisteredEmployees()'/> Both Active and Inactive Employees </input> <br/><br/> ");
 	
 }
 
 
-
+function retrieveAllRegisteredEmployees(){
+	
+	var departmentCode = $('#Department_Code').val();
+	var employee_status = $('input:radio[name=employee_status]:checked').val()
+	
+	if(departmentCode=='-1'){
+		
+	alert('Please Select a Department');
+	}
+	else{
+	
+	//alert(employee_status+" employees in "+departmentCode+" department");
+	$('#user_message').html('<font color="#CC0000"> Please wait.... your request is being processed.....</font>');
+	
+	//start
+	
+   $.ajax({
+   type: "POST",   
+   url: base_url+"index.php/UserAdministration/EmployeeAdministration/retriveRegisteredEmployeesInDepartment", 
+   data: "employeeStatus="+employee_status+"&departmentCode="+departmentCode,
+   
+   success: function(msg){
+    
+   $('#user_message').html('');	
+   $('#registeredEmployeeTable').html(msg);  
+   
+   }
+   });
+	
+	//end
+	
+	}//else
+}//function
 
 

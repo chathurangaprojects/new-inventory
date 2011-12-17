@@ -13,6 +13,7 @@
             $this->load->helper(array('form', 'url'));
             $this->load->library('form_validation');
 			$this->load->model("PurchaseOrder/EmailClass");
+			$this->load->model(array('PurchaseOrder/DepartmentModel','PurchaseOrder/DepartmentService'));
         }
 	
 	
@@ -250,8 +251,98 @@
 	 
 	 
 	 
+	 
+	 function retriveRegisteredEmployeesInDepartment(){
+	 
+	 
+	 $departmentCode=$this->input->post('departmentCode',TRUE);
+	 $employeeStatus=$this->input->post('employeeStatus',TRUE);
+
+	   
+	  	$userService=new UserService();
+		$userModel=new UserModel();
+		
+		$userModel->setDepartmentCode($departmentCode);
+		$userModel->setStatus($employeeStatus);
+		$userModelObjectArray=$userService->retriveAllUsersMatchesProvidedCrieteria($userModel);
+
+    //retrieve employees
+	
+	echo '<font color="#009900"> '.sizeof($userModelObjectArray).' records were found<br/><br/>';
+	
+	$tableHeader='<table id="sort-table"> 
+                        <thead> 
+                        <tr>
+                            <th></th>
+                            <th>Employee Name</th> 
+                            <th>Designation</th> 
+                            <th>Department</th> 
+                            <th>Email</th> 
+                            <th>Level</th>
+                            <th style="width:128px">Options</th> 
+                        </tr> 
+                        </thead> 
+                                                                                                          
+                          <tbody> ';
+						  
+						  $userData="";
+						  
+						  $departmentModel=new DepartmentModel();
+						  $departmentService = new DepartmentService();
+						  
+	 for($index=0;$index<sizeof($userModelObjectArray);$index++){
+	 
+	 						//finding the department name
+							$departmentCode=$userModelObjectArray[$index]->getDepartmentCode();
+							
+							$departmentModel->setDepartmentCode($departmentCode);
+							$departmentName=$departmentService->retrieveDepartmentName($departmentModel);
+							
+							
+							//finding the level code and leveldescription			
+							$userModel=new UserModel();							
+							$userModel->setLevelCode($userModelObjectArray[$index]->getLevelCode());
+							
+							$userModelRetrieved=$userService->retriveUserLevel($userModel);
+							
+							
+	  $userData=$userData.'<tr>
+	  <td>'.$userModelObjectArray[$index]->getEmployeeCode().'</td>
+	  <td>'.$userModelObjectArray[$index]->getDesignation().'</td>
+	  <td>'.$userModelObjectArray[$index]->getEmployeeName().'</td>
+	  <td>'.$departmentName.'</td>
+	  <td>'.$userModelObjectArray[$index]->getEmail().'</td>
+	  <td>'.$userModelRetrieved->getLevel()."-".$userModelRetrieved->getDescription().'</td> 
+	  <td>
+       <a class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Edit this example" href="#">
+        <span class="ui-icon ui-icon-wrench"></span>
+       </a>';
+	    if($userModelObjectArray[$index]->getStatus()=='0'){
+	   $userData=$userData.'<a href="'.base_url().'index.php/UserAdministration/EmployeeAdministration/activateEmployee" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Enabled."  style="cursor:pointer;">
+	   <span class="ui-icon ui-icon-arrowreturnthick-1-n"></span>
+	   </a>';
+	   }
+	   
+	    if($userModelObjectArray[$index]->getStatus()=='1'){
+	   $userData=$userData.'<a href="'.base_url().'index.php/UserAdministration/EmployeeAdministration/inactivateEmployee" class="btn_no_text btn ui-state-default ui-corner-all tooltip" title="Mark as Disabled."  style="cursor:pointer;">
+       <span class="ui-icon ui-icon-arrowreturnthick-1-s"></span>
+	   </a>
+       </td></tr>'; 
+	  }
+	  
+	 
+	 }//for
+		
+		$tableFooter=' </tbody> </table>';
+						  				  
+
+       echo $tableHeader.''.$userData.''.$tableFooter;
+
+	 }//retriveRegisteredEmployeesInDepartment
+	 
+	 
+	 
+	 
 	}//class
 	
 ?>
-		
-		
