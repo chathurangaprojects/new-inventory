@@ -238,6 +238,51 @@
 			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
 						
 			if($hasPriviledges){
+			/*	
+				//getting offest
+				$offset=$this->uri->segment(4);
+				//echo $offset;
+				
+				if($offset==1 || $offset==''){
+				//first offset
+				
+                $this->session->set_userdata('next_offset','3');
+				 $start=1; 
+				 $end=3;
+				}
+				else{
+				
+				$previous=$this->session->userdata('next_offset');
+				$start=$previous;
+				$end=$previous+2;
+				
+				$this->session->set_userdata('next_offset',$end);
+				
+				}
+				echo "sart".$start." end".$end;
+				
+				$userService=new UserService();				
+				$userModelObjectArray=$userService->retrieveAllEmployeeDetailsWithOffset($start,$end);
+				
+				echo "arr".sizeof($userModelObjectArray);
+				
+				$data=array('userModelObjectArray'=>$userModelObjectArray,'userService'=>$userService);
+				
+				//start
+				$this->load->library('pagination');
+				$config['base_url'] = 'http://localhost/LCS_IMS/index.php/UserAdministration/EmployeeAdministration/displayRegisteredEmployees';
+   $config['total_rows'] = '4';
+   $config['per_page'] = '2';
+
+   $this->pagination->initialize($config); 
+				//end
+				
+				//user has the priviledges
+		    $this->template->setTitles('Manage Employees', 'Employee Management', 'Registerd Employees', 'Registered Active Employees');
+			
+			$this->template->load('template', 'RegisteredEmployees',$data);
+			*/
+				
 				
 				$userService=new UserService();				
 				$userModelObjectArray=$userService->retrieveAllEmployeeDetails();
@@ -245,13 +290,12 @@
 				$data=array('userModelObjectArray'=>$userModelObjectArray,'userService'=>$userService);
 				
 				//start
-/*				$this->load->library('pagination');
+				$this->load->library('pagination');
 				$config['base_url'] = 'http://localhost/LCS_IMS/index.php/UserAdministration/EmployeeAdministration/displayRegisteredEmployees';
    $config['total_rows'] = '4';
    $config['per_page'] = '2';
-  // $config['uri_segment'] = '3';
 
-   $this->pagination->initialize($config); */
+   $this->pagination->initialize($config); 
 				//end
 				
 				//user has the priviledges

@@ -121,8 +121,8 @@
                              </tbody> 
                              
                           </table>
-<?php /*?>						<?php echo $this->pagination->create_links(); ?>  
-<?php */?>	
+						<?php echo $this->pagination->create_links(); ?>  
+	
 					  </div>
                         </div>
                         
