@@ -55,9 +55,9 @@
 				 $departmentService = new DepartmentService();
 				 
 			  
-			    $userService=new UserService();
+			   // $userService=new UserService();
 				
-				$userModelObjectArray=$userService->retrieveAllEmployeeDetails();
+				//$userModelObjectArray=$userService->retrieveAllEmployeeDetails();
 						 
 					for($index=0;$index<sizeof($userModelObjectArray);$index++){
 							?>
@@ -121,8 +121,9 @@
                              </tbody> 
                              
                           </table>
-						  
-						  </div>
+<?php /*?>						<?php echo $this->pagination->create_links(); ?>  
+<?php */?>	
+					  </div>
                         </div>
                         
  

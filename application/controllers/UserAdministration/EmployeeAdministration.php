@@ -171,7 +171,7 @@
 	 
 	 
 	 
-	 
+	 /*
      function displayRegisteredEmployees(){
 		 
 		
@@ -216,6 +216,74 @@
 			 
 	 
 	 }//displayRegisteredEmployees
+	 
+	 */
+	 
+	 
+	 
+	 
+	 
+	 function displayRegisteredEmployees(){
+		 
+		
+			if($this->session->userdata('logged_in'))
+			{
+		    //the user is logged and priviledges should be checked
+			$userPriviledgeModel=new UserPriviledge();
+			
+		    $userPriviledgeModel->setLevelCode($this->session->userdata('level'));
+			$userPriviledgeModel->setDepartmentCode( $this->session->userdata('department'));
+			$userPriviledgeModel->setPriviledgeCode(2);//priviledge 2 is for edit employees
+			
+			$hasPriviledges=$userPriviledgeModel->checkUserPriviledge($userPriviledgeModel);
+						
+			if($hasPriviledges){
+				
+				$userService=new UserService();				
+				$userModelObjectArray=$userService->retrieveAllEmployeeDetails();
+				
+				$data=array('userModelObjectArray'=>$userModelObjectArray,'userService'=>$userService);
+				
+				//start
+/*				$this->load->library('pagination');
+				$config['base_url'] = 'http://localhost/LCS_IMS/index.php/UserAdministration/EmployeeAdministration/displayRegisteredEmployees';
+   $config['total_rows'] = '4';
+   $config['per_page'] = '2';
+  // $config['uri_segment'] = '3';
+
+   $this->pagination->initialize($config); */
+				//end
+				
+				//user has the priviledges
+		    $this->template->setTitles('Manage Employees', 'Employee Management', 'Registerd Employees', 'Registered Active Employees');
+			
+			$this->template->load('template', 'RegisteredEmployees',$data);
+			
+				
+			}
+			else{
+				
+			  // "user doesnt have the priviledges";
+			  
+			  $this->template->setTitles('Access Denied', 'You are not allowed to access this page.', 'You are not allowed to access this page.', 'Please Contact Administrator...');
+			
+			$this->template->load('template', 'errorPage');
+						
+			}
+			
+			}//if
+			else{
+				
+				
+			redirect(base_url().'index.php');
+	
+			
+			}
+			 
+	 
+	 }//displayRegisteredEmployees
+	 	 
+	 
 	 
 	 
 	 
@@ -453,6 +521,7 @@
 			if($hasPriviledges){
 			
         		echo "edit employee ".$employeeID;
+
 		   
 		     }
 			else{
