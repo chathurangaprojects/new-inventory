@@ -21,7 +21,7 @@ class UserService extends CI_Model {
 		
 		$password=md5($userModel->getPassword());
 		
-		$parameters=array('Email' =>$userModel->getEmail(),'Password'=>$password);
+		$parameters=array('Email' =>$userModel->getEmail(),'Password'=>$password,'Status'=>'1');
 		
 		$query = $this->db->get_where('ta_ims_employee',$parameters);
 		
