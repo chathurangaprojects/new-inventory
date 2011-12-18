@@ -9,7 +9,7 @@
 			
 			$this->load->model('UserModel');
 			$this->load->model('UserService');
-
+            $this->load->model('UserModerationModel');
             $this->load->helper(array('form', 'url'));
             $this->load->library('form_validation');
 			$this->load->model("PurchaseOrder/EmailClass");
@@ -238,9 +238,23 @@
 						
 			if($hasPriviledges){
 			
-        		 echo "Activate Employee".$employeeID;
+        		// echo "Activate Employee".$employeeID;
+	
+				
+			$userModerationModel = new UserModerationModel();   
+      	    $userModerationModel->setUserID($employeeID);
+  			$userModerationModel->setModifiedByUser($this->session->userdata('emp_id'));
+ 		    $userModerationModel->setModifiedStatus('enabled');
+  
+             	$userService=new UserService();
+				
+				$userService->enableSelectedUserAccount($userModerationModel);
+				
+				redirect(base_url().'index.php/UserAdministration/EmployeeAdministration/displayRegisteredEmployees');	
+	
+				
 		   
-		     }
+		     }//hasPriviledges
 			else{
 				
 			  // "user doesnt have the priviledges";
@@ -284,7 +298,19 @@
 						
 			if($hasPriviledges){
 			
-        		echo "inactivateEmployee".$employeeID;
+        		//echo "inactivateEmployee".$employeeID;
+				
+			$userModerationModel = new UserModerationModel();   
+      	    $userModerationModel->setUserID($employeeID);
+  			$userModerationModel->setModifiedByUser($this->session->userdata('emp_id'));
+ 		    $userModerationModel->setModifiedStatus('disabled');
+  
+             	$userService=new UserService();
+				
+				$userService->disableSelectedUserAccount($userModerationModel);
+				
+				redirect(base_url().'index.php/UserAdministration/EmployeeAdministration/displayRegisteredEmployees');
+
 		   
 		     }
 			else{

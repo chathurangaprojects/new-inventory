@@ -11,6 +11,7 @@ class UserService extends CI_Model {
 		$this->load->database();
         $this->load->model('UserModel');
 		$this->load->model('UserLevelModel');
+		$this->load->model('UserModerationModel');
     }
 	
 	
@@ -179,6 +180,40 @@ class UserService extends CI_Model {
    
    
    
+   
+   
+   function disableSelectedUserAccount($userModerationModel){
+   
+    $userID=$userModerationModel->getUserID();
+	
+   $this->db->trans_start();
+   //inserting to the employee moderation table
+   $this->db->insert('ta_ims_employee_moderation', $userModerationModel); 
+   
+   //updating the status id the employee table
+   $this->db->update('ta_ims_employee', array('Status'=>'0'), array('Employee_Code' =>$userID ));
+   $this->db->trans_complete();  
+  
+   }//disableSelectedUserAccount
+   
+   
+   
+   
+   
+   
+   function enableSelectedUserAccount($userModerationModel){
+   
+   $userID=$userModerationModel->getUserID();
+	
+   $this->db->trans_start();
+   //inserting to the employee moderation table
+   $this->db->insert('ta_ims_employee_moderation', $userModerationModel); 
+   
+   //updating the status id the employee table
+   $this->db->update('ta_ims_employee', array('Status'=>'1'), array('Employee_Code' =>$userID ));
+   $this->db->trans_complete();  
+  
+   }//enableSelectedUserAccount
    
    
 } 
