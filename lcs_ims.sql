@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.2deb1
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2011 at 05:25 PM
--- Server version: 5.1.41
--- PHP Version: 5.3.2-1ubuntu4.10
+-- Generation Time: Dec 18, 2011 at 01:01 PM
+-- Server version: 5.0.67
+-- PHP Version: 5.3.0
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -26,7 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `fa_ims_items` (
-  `FA_Item_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `FA_Item_Code` int(11) NOT NULL auto_increment,
   `Item_Code` int(11) NOT NULL,
   `FA_Item_Status_Code` int(11) NOT NULL,
   `Primary_Code` int(11) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `fa_ims_items` (
   `Life_Span` int(11) NOT NULL,
   `Dep_Life_Span` int(11) NOT NULL,
   `Disposed_Status` int(11) NOT NULL,
-  PRIMARY KEY (`FA_Item_Code`),
+  PRIMARY KEY  (`FA_Item_Code`),
   KEY `FA_Item_Status_Code` (`FA_Item_Status_Code`),
   KEY `Secondary_Code` (`Secondary_Code`),
   KEY `Primary_Code` (`Primary_Code`),
@@ -60,9 +60,9 @@ CREATE TABLE IF NOT EXISTS `fa_ims_items` (
 --
 
 CREATE TABLE IF NOT EXISTS `fa_ims_item_status` (
-  `FA_Item_Status_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `FA_Item_Status_Code` int(11) NOT NULL auto_increment,
   `FA_Item_Status` varchar(100) NOT NULL,
-  PRIMARY KEY (`FA_Item_Status_Code`)
+  PRIMARY KEY  (`FA_Item_Status_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -77,9 +77,9 @@ CREATE TABLE IF NOT EXISTS `fa_ims_item_status` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_bulk_type` (
-  `Bulk_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Bulk_Code` int(11) NOT NULL auto_increment,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Bulk_Code`)
+  PRIMARY KEY  (`Bulk_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -97,9 +97,9 @@ INSERT INTO `ta_ims_bulk_type` (`Bulk_Code`, `Description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_country` (
-  `Country_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Country_Code` int(11) NOT NULL auto_increment,
   `Country` varchar(100) NOT NULL,
-  PRIMARY KEY (`Country_Code`)
+  PRIMARY KEY  (`Country_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
@@ -116,11 +116,11 @@ INSERT INTO `ta_ims_country` (`Country_Code`, `Country`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_currency` (
-  `Currency_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Currency_Code` int(11) NOT NULL auto_increment,
   `Currency` varchar(10) NOT NULL,
   `Conversion_Rate` decimal(10,2) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Currency_Code`)
+  PRIMARY KEY  (`Currency_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
@@ -138,7 +138,7 @@ INSERT INTO `ta_ims_currency` (`Currency_Code`, `Currency`, `Conversion_Rate`, `
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_customer` (
-  `Customer_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Customer_Code` int(11) NOT NULL auto_increment,
   `Customer_Name` varchar(100) NOT NULL,
   `Address` varchar(255) NOT NULL,
   `City` varchar(100) NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_customer` (
   `Email` varchar(100) NOT NULL,
   `Website` varchar(100) NOT NULL,
   `Active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Customer_Code`),
+  PRIMARY KEY  (`Customer_Code`),
   KEY `Country_Code` (`Country_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -165,11 +165,11 @@ CREATE TABLE IF NOT EXISTS `ta_ims_customer` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_cust_ser_master` (
-  `Cust_Ser_Master_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Cust_Ser_Master_Code` int(11) NOT NULL auto_increment,
   `Customer_Code` int(11) NOT NULL,
   `Service_Code` int(11) NOT NULL,
   `Serial` varchar(100) NOT NULL,
-  PRIMARY KEY (`Cust_Ser_Master_Code`),
+  PRIMARY KEY  (`Cust_Ser_Master_Code`),
   KEY `Customer_Code` (`Customer_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -185,11 +185,11 @@ CREATE TABLE IF NOT EXISTS `ta_ims_cust_ser_master` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_department` (
-  `Department_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Department_Code` int(11) NOT NULL auto_increment,
   `Department_ID` varchar(10) NOT NULL,
   `Department_Name` varchar(100) NOT NULL,
   `Active` enum('1','0') NOT NULL,
-  PRIMARY KEY (`Department_Code`)
+  PRIMARY KEY  (`Department_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_department_head` (
   `Employee_Code` int(11) NOT NULL,
   `Department_Code` int(11) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Employee_Code`,`Department_Code`),
+  PRIMARY KEY  (`Employee_Code`,`Department_Code`),
   KEY `Department_Code` (`Department_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -240,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_department_head` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_employee` (
-  `Employee_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Employee_Code` int(11) NOT NULL auto_increment,
   `Employee_Name` varchar(255) NOT NULL,
   `Designation` varchar(100) NOT NULL,
   `Level_Code` int(11) NOT NULL,
@@ -249,10 +249,10 @@ CREATE TABLE IF NOT EXISTS `ta_ims_employee` (
   `Password` varchar(100) NOT NULL,
   `Confirmation_Code` varchar(100) NOT NULL,
   `Status` enum('1','0') NOT NULL,
-  PRIMARY KEY (`Employee_Code`),
+  PRIMARY KEY  (`Employee_Code`),
   KEY `Department_Code` (`Department_Code`),
   KEY `Level_Code` (`Level_Code`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `ta_ims_employee`
@@ -260,8 +260,41 @@ CREATE TABLE IF NOT EXISTS `ta_ims_employee` (
 
 INSERT INTO `ta_ims_employee` (`Employee_Code`, `Employee_Name`, `Designation`, `Level_Code`, `Department_Code`, `Email`, `Password`, `Confirmation_Code`, `Status`) VALUES
 (1, 'Guest', 'Engineer', 1, 1, 'guest@lankacom.net', '202cb962ac59075b964b07152d234b70', '3IFMX872YBEGE1F2BJSW8V79K1C8643TKT6N86XG', '1'),
-(2, 'Viran Fernando', 'Software Engineer', 1, 7, 'viranf@lankacom.net', '202cb962ac59075b964b07152d234b70', '', '0'),
-(6, 'sss', 'sss', 2, 2, 'ssss', 'chathuranga', '123', '1');
+(2, 'Viran Fernando', 'Software Engineer', 1, 7, 'viranf@lankacom.net', '202cb962ac59075b964b07152d234b70', '', '1'),
+(6, 'sss', 'sss', 2, 2, 'ssss', 'chathuranga', '123', '1'),
+(7, 'ch', 'ne', 1, 15, 'ne@ssss.ss', 'cfd5bbb98e5c33592fb4558de2708f51', '123', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ta_ims_employee_moderation`
+--
+
+CREATE TABLE IF NOT EXISTS `ta_ims_employee_moderation` (
+  `moderationID` int(11) NOT NULL auto_increment,
+  `userID` int(11) NOT NULL,
+  `modifiedByUser` int(11) NOT NULL,
+  `modifiedStatus` varchar(100) NOT NULL,
+  `dateModified` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`moderationID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `ta_ims_employee_moderation`
+--
+
+INSERT INTO `ta_ims_employee_moderation` (`moderationID`, `userID`, `modifiedByUser`, `modifiedStatus`, `dateModified`) VALUES
+(3, 1, 1, 'disabled', '2011-12-18 10:30:13'),
+(4, 1, 1, 'disabled', '2011-12-18 10:33:13'),
+(5, 6, 1, 'disabled', '2011-12-18 10:33:32'),
+(6, 2, 1, 'enabled', '2011-12-18 10:34:02'),
+(7, 7, 1, 'disabled', '2011-12-18 10:34:53'),
+(8, 7, 1, 'enabled', '2011-12-18 10:35:04'),
+(9, 1, 1, 'enabled', '2011-12-18 10:35:35'),
+(10, 6, 1, 'enabled', '2011-12-18 10:37:19'),
+(11, 1, 1, 'disabled', '2011-12-18 17:27:11'),
+(12, 1, 1, 'enabled', '2011-12-18 17:27:17'),
+(13, 1, 1, 'disabled', '2011-12-18 17:29:56');
 
 -- --------------------------------------------------------
 
@@ -270,14 +303,14 @@ INSERT INTO `ta_ims_employee` (`Employee_Code`, `Employee_Name`, `Designation`, 
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_grn_detail` (
-  `GRN_Detail_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `GRN_Detail_Code` int(11) NOT NULL auto_increment,
   `GRN_No` int(11) NOT NULL,
   `Master_Item_Code` int(11) NOT NULL,
   `LCS_No` varchar(100) NOT NULL,
   `Item_Serial_No` varchar(100) NOT NULL,
   `Order_Qty` decimal(10,0) NOT NULL,
   `Received_Qty` decimal(10,0) NOT NULL,
-  PRIMARY KEY (`GRN_Detail_Code`),
+  PRIMARY KEY  (`GRN_Detail_Code`),
   KEY `GRN_No` (`GRN_No`),
   KEY `Master_Item_Code` (`Master_Item_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -294,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_grn_detail` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_grn_header` (
-  `GRN_No` int(11) NOT NULL AUTO_INCREMENT,
+  `GRN_No` int(11) NOT NULL auto_increment,
   `Order_Code` int(11) NOT NULL,
   `Invoice_No` varchar(100) NOT NULL,
   `Currency` varchar(10) NOT NULL,
@@ -303,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_grn_header` (
   `Payment_Mode` varchar(100) NOT NULL,
   `GRN_Date` datetime NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`GRN_No`),
+  PRIMARY KEY  (`GRN_No`),
   KEY `Order_Code` (`Order_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -342,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_items` (
   `Department_Code` int(11) NOT NULL,
   `Fa` int(2) NOT NULL,
   `Status` int(2) NOT NULL,
-  PRIMARY KEY (`Item_Code`),
+  PRIMARY KEY  (`Item_Code`),
   KEY `Manufacture_Code` (`Manufacture_Code`),
   KEY `Order_Code` (`Order_Code`),
   KEY `Customer_Code` (`Customer_Code`,`Service_Code`,`Connection_Code`),
@@ -364,9 +397,9 @@ CREATE TABLE IF NOT EXISTS `ta_ims_items` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_item_condition` (
-  `Item_Condition_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Item_Condition_Code` int(11) NOT NULL auto_increment,
   `Item_Condition` varchar(100) NOT NULL,
-  PRIMARY KEY (`Item_Condition_Code`)
+  PRIMARY KEY  (`Item_Condition_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -386,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_item_location` (
   `Connection_Code` int(11) NOT NULL,
   `Connection` varchar(100) NOT NULL,
   `...` int(11) NOT NULL,
-  PRIMARY KEY (`Customer_Code`,`Service_Code`,`Connection_Code`),
+  PRIMARY KEY  (`Customer_Code`,`Service_Code`,`Connection_Code`),
   KEY `Service_Code` (`Service_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -402,7 +435,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_item_location` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_item_master` (
-  `Master_Item_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Master_Item_Code` int(11) NOT NULL auto_increment,
   `Item_Name` varchar(100) NOT NULL,
   `Type_Code` int(11) NOT NULL,
   `Picture` varchar(1000) NOT NULL,
@@ -412,7 +445,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_item_master` (
   `Primary_cat` varchar(10) NOT NULL,
   `Secondary_cat` varchar(10) NOT NULL,
   `Employee_Code` int(11) NOT NULL,
-  PRIMARY KEY (`Master_Item_Code`),
+  PRIMARY KEY  (`Master_Item_Code`),
   KEY `Type_Code` (`Type_Code`),
   KEY `Employee_Code` (`Employee_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4366 ;
@@ -4769,7 +4802,7 @@ INSERT INTO `ta_ims_item_master` (`Master_Item_Code`, `Item_Name`, `Type_Code`, 
 CREATE TABLE IF NOT EXISTS `ta_ims_item_property_value` (
   `Master_Item_Code` int(11) NOT NULL,
   `Property_Value_Code` int(11) NOT NULL,
-  PRIMARY KEY (`Master_Item_Code`,`Property_Value_Code`),
+  PRIMARY KEY  (`Master_Item_Code`,`Property_Value_Code`),
   KEY `Property_Value_Code` (`Property_Value_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -4795,9 +4828,9 @@ INSERT INTO `ta_ims_item_property_value` (`Master_Item_Code`, `Property_Value_Co
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_item_status` (
-  `Status_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Status_Code` int(11) NOT NULL auto_increment,
   `Status` varchar(100) NOT NULL,
-  PRIMARY KEY (`Status_Code`)
+  PRIMARY KEY  (`Status_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -4812,13 +4845,13 @@ CREATE TABLE IF NOT EXISTS `ta_ims_item_status` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_item_type` (
-  `Type_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Type_Code` int(11) NOT NULL auto_increment,
   `Item_Type` varchar(100) NOT NULL,
   `Category_Code` int(11) NOT NULL,
   `Bulk_Code` int(11) NOT NULL,
   `Unit_Code` int(11) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Type_Code`),
+  PRIMARY KEY  (`Type_Code`),
   KEY `Category_Code` (`Category_Code`),
   KEY `Bulk_Code` (`Bulk_Code`),
   KEY `Unit_Code` (`Unit_Code`)
@@ -4852,10 +4885,10 @@ INSERT INTO `ta_ims_item_type` (`Type_Code`, `Item_Type`, `Category_Code`, `Bulk
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_level` (
-  `Level_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Level_Code` int(11) NOT NULL auto_increment,
   `Level` varchar(20) NOT NULL,
   `Description` varchar(100) NOT NULL,
-  PRIMARY KEY (`Level_Code`)
+  PRIMARY KEY  (`Level_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
@@ -4876,12 +4909,12 @@ INSERT INTO `ta_ims_level` (`Level_Code`, `Level`, `Description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_level_privilege` (
-  `Level_Privilege_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Level_Privilege_Code` int(11) NOT NULL auto_increment,
   `Level_Code` int(11) NOT NULL,
   `Department_Code` int(11) NOT NULL,
   `Privilege_Code` int(11) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Level_Privilege_Code`),
+  PRIMARY KEY  (`Level_Privilege_Code`),
   KEY `Level_Code` (`Level_Code`),
   KEY `Department_Code` (`Department_Code`),
   KEY `Privilege_Code` (`Privilege_Code`)
@@ -4904,9 +4937,9 @@ INSERT INTO `ta_ims_level_privilege` (`Level_Privilege_Code`, `Level_Code`, `Dep
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_location` (
-  `Location_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Location_Code` int(11) NOT NULL auto_increment,
   `Location` varchar(100) NOT NULL,
-  PRIMARY KEY (`Location_Code`)
+  PRIMARY KEY  (`Location_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -4921,10 +4954,10 @@ CREATE TABLE IF NOT EXISTS `ta_ims_location` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_main_category` (
-  `Category_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Category_Code` int(11) NOT NULL auto_increment,
   `Category_Name` varchar(100) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Category_Code`)
+  PRIMARY KEY  (`Category_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -4943,9 +4976,9 @@ INSERT INTO `ta_ims_main_category` (`Category_Code`, `Category_Name`, `Descripti
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_manufacture` (
-  `Manufacture_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Manufacture_Code` int(11) NOT NULL auto_increment,
   `Manufactured_Type` varchar(100) NOT NULL,
-  PRIMARY KEY (`Manufacture_Code`)
+  PRIMARY KEY  (`Manufacture_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -4960,10 +4993,10 @@ CREATE TABLE IF NOT EXISTS `ta_ims_manufacture` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_manufactured_item` (
-  `Manufactured_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Manufactured_Code` int(11) NOT NULL auto_increment,
   `Main_Item_Code` int(11) NOT NULL,
   `Sub_Item_Code` int(11) NOT NULL,
-  PRIMARY KEY (`Manufactured_Code`),
+  PRIMARY KEY  (`Manufactured_Code`),
   KEY `Main_Item_Code` (`Main_Item_Code`),
   KEY `Sub_Item_Code` (`Sub_Item_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -4980,9 +5013,9 @@ CREATE TABLE IF NOT EXISTS `ta_ims_manufactured_item` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_payment_type` (
-  `Payment_Type_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Payment_Type_Code` int(11) NOT NULL auto_increment,
   `Payment_Type` varchar(100) NOT NULL,
-  PRIMARY KEY (`Payment_Type_Code`)
+  PRIMARY KEY  (`Payment_Type_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -5016,7 +5049,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_po_details` (
   `Breakable` tinyint(1) NOT NULL,
   `Breakable_Unit` int(11) NOT NULL,
   `Breakable_Qty` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`Order_Code`,`Master_Item_Code`),
+  PRIMARY KEY  (`Order_Code`,`Master_Item_Code`),
   KEY `Order_Code` (`Order_Code`),
   KEY `Master_Item_Code` (`Master_Item_Code`),
   KEY `Unit` (`Unit`),
@@ -5035,7 +5068,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_po_details` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_po_header` (
-  `Order_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Order_Code` int(11) NOT NULL auto_increment,
   `Supplier_Code` int(11) NOT NULL,
   `Order_Date` datetime NOT NULL,
   `Expected_Date` datetime NOT NULL,
@@ -5062,7 +5095,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_po_header` (
   `PO_Cancel_Remarks` varchar(255) NOT NULL,
   `Print_Original` tinyint(1) NOT NULL,
   `Status_Code` int(11) NOT NULL,
-  PRIMARY KEY (`Order_Code`),
+  PRIMARY KEY  (`Order_Code`),
   KEY `Employee_Code` (`Created_By`),
   KEY `Currency_Code` (`Currency_Code`),
   KEY `Payment_Type_Code` (`Payment_Type_Code`),
@@ -5090,9 +5123,9 @@ INSERT INTO `ta_ims_po_header` (`Order_Code`, `Supplier_Code`, `Order_Date`, `Ex
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_po_status` (
-  `Status_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Status_Code` int(11) NOT NULL auto_increment,
   `Status` varchar(100) NOT NULL,
-  PRIMARY KEY (`Status_Code`)
+  PRIMARY KEY  (`Status_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
@@ -5114,13 +5147,13 @@ INSERT INTO `ta_ims_po_status` (`Status_Code`, `Status`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_po_status_update` (
-  `Approve_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Approve_Code` int(11) NOT NULL auto_increment,
   `Order_Code` int(11) NOT NULL,
   `Status_Code` int(11) NOT NULL,
   `Employee_Code` int(11) NOT NULL,
   `Approved_Date` datetime NOT NULL,
   `Comments` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Approve_Code`),
+  PRIMARY KEY  (`Approve_Code`),
   KEY `Status_Code` (`Status_Code`),
   KEY `Order_Code` (`Order_Code`),
   KEY `Employee_Code` (`Employee_Code`)
@@ -5138,12 +5171,12 @@ CREATE TABLE IF NOT EXISTS `ta_ims_po_status_update` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_primary` (
-  `Primary_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Primary_Code` int(11) NOT NULL auto_increment,
   `Primary_ID` varchar(100) NOT NULL,
   `Description` varchar(1000) NOT NULL,
   `Life_Span` decimal(10,0) NOT NULL,
   `Active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Primary_Code`)
+  PRIMARY KEY  (`Primary_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -5158,11 +5191,11 @@ CREATE TABLE IF NOT EXISTS `ta_ims_primary` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_privilege` (
-  `Privilege_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Privilege_Code` int(11) NOT NULL auto_increment,
   `Privilege_Master_Code` int(11) NOT NULL,
   `Privilege` varchar(100) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Privilege_Code`),
+  PRIMARY KEY  (`Privilege_Code`),
   KEY `Privilege_Master_Code` (`Privilege_Master_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
@@ -5183,10 +5216,10 @@ INSERT INTO `ta_ims_privilege` (`Privilege_Code`, `Privilege_Master_Code`, `Priv
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_privilege_master` (
-  `Privilege_Master_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Privilege_Master_Code` int(11) NOT NULL auto_increment,
   `Master_Privilege` varchar(100) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Privilege_Master_Code`)
+  PRIMARY KEY  (`Privilege_Master_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -5205,11 +5238,11 @@ INSERT INTO `ta_ims_privilege_master` (`Privilege_Master_Code`, `Master_Privileg
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_property` (
-  `Propertiy_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Propertiy_Code` int(11) NOT NULL auto_increment,
   `Type_Code` int(11) NOT NULL,
   `Property` varchar(100) NOT NULL,
   `Property_Description` varchar(1000) NOT NULL,
-  PRIMARY KEY (`Propertiy_Code`),
+  PRIMARY KEY  (`Propertiy_Code`),
   KEY `Type_Code` (`Type_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
@@ -5242,10 +5275,10 @@ INSERT INTO `ta_ims_property` (`Propertiy_Code`, `Type_Code`, `Property`, `Prope
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_property_value` (
-  `Property_Value_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Property_Value_Code` int(11) NOT NULL auto_increment,
   `Propertiy_Code` int(11) NOT NULL,
   `Propertiy_Values` varchar(100) NOT NULL,
-  PRIMARY KEY (`Property_Value_Code`),
+  PRIMARY KEY  (`Property_Value_Code`),
   KEY `Propertiy_Code` (`Propertiy_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
@@ -5311,9 +5344,9 @@ INSERT INTO `ta_ims_property_value` (`Property_Value_Code`, `Propertiy_Code`, `P
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_quality_status` (
-  `Quality_Status_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Quality_Status_Code` int(11) NOT NULL auto_increment,
   `Quality_Status` varchar(100) NOT NULL,
-  PRIMARY KEY (`Quality_Status_Code`)
+  PRIMARY KEY  (`Quality_Status_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
@@ -5332,12 +5365,12 @@ INSERT INTO `ta_ims_quality_status` (`Quality_Status_Code`, `Quality_Status`) VA
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_secondary` (
-  `Secondary_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Secondary_Code` int(11) NOT NULL auto_increment,
   `Primary_Code` int(11) NOT NULL,
   `Secondary_ID` varchar(10) NOT NULL,
   `Next_Serial_Count` int(11) NOT NULL,
   `Description` varchar(100) NOT NULL,
-  PRIMARY KEY (`Secondary_Code`),
+  PRIMARY KEY  (`Secondary_Code`),
   KEY `Primary_Code` (`Primary_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -5353,9 +5386,9 @@ CREATE TABLE IF NOT EXISTS `ta_ims_secondary` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_service` (
-  `Service_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Service_Code` int(11) NOT NULL auto_increment,
   `Service` varchar(100) NOT NULL,
-  PRIMARY KEY (`Service_Code`)
+  PRIMARY KEY  (`Service_Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -5370,7 +5403,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_service` (
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_supplier_header` (
-  `Supplier_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Supplier_Code` int(11) NOT NULL auto_increment,
   `Supplier_Name` varchar(100) NOT NULL,
   `Address` varchar(255) NOT NULL,
   `City` varchar(100) NOT NULL,
@@ -5382,7 +5415,7 @@ CREATE TABLE IF NOT EXISTS `ta_ims_supplier_header` (
   `Reg_No` varchar(100) NOT NULL,
   `Website` varchar(100) NOT NULL,
   `Active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Supplier_Code`),
+  PRIMARY KEY  (`Supplier_Code`),
   KEY `Country_Code` (`Country_Code`),
   KEY `Supplier_Type_Code` (`Supplier_Type`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -5403,9 +5436,9 @@ INSERT INTO `ta_ims_supplier_header` (`Supplier_Code`, `Supplier_Name`, `Address
 --
 
 CREATE TABLE IF NOT EXISTS `ta_ims_unit` (
-  `Unit_Code` int(11) NOT NULL AUTO_INCREMENT,
+  `Unit_Code` int(11) NOT NULL auto_increment,
   `Description` varchar(100) NOT NULL,
-  PRIMARY KEY (`Unit_Code`)
+  PRIMARY KEY  (`Unit_Code`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
